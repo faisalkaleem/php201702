@@ -1,0 +1,48 @@
+Internet?
+
+Browser -> DNS Server -> Server (using IP address and port)
+-> Apache -> PHP ->  
+Domain Name => IP Address
+
+**Google: How a website is loaded on internet.
+
+DNS => Domain Name Server
+
+Web Server on port 80 => 8.8.8.8
+Apache
+IIS
+Tomcat
+lighthttpd
+nginx
+
+PHP
+ASP.net
+node.js
+ruby
+
+
+
+IPV4 => 192.168.0.1
+127.0.0.1
+
+Firefox => F12 to open debug tool
+
+C:\windows\system32\drivers\etc\hosts
+
+
+Setup Develop Environment and Tools
+-----------------------------------
+Apache
+PHP
+MySQL
+
+XAMPP, WAMPP
+
+Editor (Netbeans, Eclipse, Subline, .....)
+Browser
+
+Debug Tools (Web Develop toolbar)
+
+** Setup you develop environment and tools
+
+Reference: http://w3schools.com/php

@@ -1,0 +1,27 @@
+Conditions and Conditional operators & Statements
+
+Assignment: Create a result card application for matric or F.Sc.
+
+Take total and obtained marks for all courses e.g: Math, Physics etc
+
+---------------------------------------------
+Subject     Total   Obtained    Percentage      
+---------------------------------------------
+Physics     100     70          70%
+Chemistry   100     56          56%
+--          --      --          --  
+--          --      --          --
+--          --      --          --
+---------------------------------------------
+Total Marks: xxx
+Obtained Marks: xxx
+Percentage Marks: xx.xx%
+Grade: xx
+---------------------------------------------
+
+
+Xampp: https://www.apachefriends.org/xampp-files/5.6.31/xampp-win32-5.6.31-0-VC11-installer.exe
+
+Netbeans: https://netbeans.org/downloads/
+
+Netbeans+jdk: http://www.oracle.com/technetwork/java/javase/downloads/jdk-netbeans-jsp-142931.html

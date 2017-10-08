@@ -1,0 +1,18 @@
+PHP/MySQL
+----------------
+Introduction
+Basic language constructs
+Object Oriented PHP
+Database Interaction.
+ - MySQL Queries (SQL)
+ - Normalization
+Data Manipulation - CRUD (Create, Read, Update, Delete) Operations
+ - Joins, Grouping, Ordering.
+Data Definition
+  - Create/Alter/Drop Database,
+  - Create/Alter/Drop Tables or Columns
+  - Create relations.
+  - 
+Views, Stored Procedures, Triggers.
+
+Project
