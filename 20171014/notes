@@ -1,0 +1,21 @@
+Assignment:
+// Prepare whole class result in single array, the array must have following inforamtion
+// 1. Student Name
+// 2. Program details
+// 3. Program total marks
+// 4. Program Obtianed marks for the student
+
+// Studen name  |   Math    |   Phy     |   Urdu    |   Total   |   Obtained    |   Percentage
+// Zahid            100         100     120             550           320           =320/550*100
+// 
+//
+//
+//
+
+
+PHP Setup refersher
+
+1. xampp            https://www.apachefriends.org/download.html
+2. netbeans         http://www.oracle.com/technetwork/articles/javase/jdk-netbeans-jsp-142931.html
+3. Start xampp control panel and start apache
+4. create new project in netbeans and save i under driverletter:\xampp\htdocs
