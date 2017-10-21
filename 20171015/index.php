@@ -1,123 +1,81 @@
 <?php
-// Arrays
-// Single Dimension Array
-
-$fruits = array("Mango", 'Apple', 'Strawberry', 'Banana', 'Pineapple');
-$fruits = ["Mango", 'Apple', 'Strawberry', 'Banana', 'Pineapple'];
-
-echo $fruits[3];
-
-//Associative Array
-$courses = array('math' => 'Mathmatics', 'ur' => 'Urdu', 'phy' => 'Physics');
-$total_marks = array('math' => 200, 'ur' => 150, 'phy' => 150);
-
-echo $courses['math'];
-echo $total_marks['math'];
-
-// Two dimmension Arrays
-// 
-
-$courses = array('math' => ['name' => array('Mathmatics'), 'total' => 200], 'ur' => ['Urdu', 150]);
-echo $courses['math']['name'][0];
-echo $courses['math']['total'];
-//$restult = array
-
-// Builtin Array function
-$marks = array(1,4,5,6,8,9,9,80,7,6,5,4,3,3,2,1);
+$class_result = array(
+    'course_totals' => array(
+        'math' => 100,
+        'phy' => 100,
+        'chem' => 100,
+        'ur' => 100,
+    ),
+    'course_names' => array(
+        'math' => 'Mathemetics',
+        'phy' => 'Physics',
+        'chem' => 'Chemistry',
+        'ur' => 'Urdu',
+    ),
+    'students' => array(
+        array('name' => 'Saad', 'result' => array('math' => 90, 'phy' => 89, 'chem' => 88, 'ur' => 78)),
+        array('name' => 'Zahid', 'result' => array('math' => 78, 'phy' => 89, 'chem' => 67, 'ur' => 58)),
+        array('name' => 'Shahid', 'result' => array('math' => 87, 'phy' => 89, 'chem' => 87, 'ur' => 88)),
+        array('name' => 'Akbar', 'result' => array('math' => 95, 'phy' => 89, 'chem' => 56, 'ur' => 68)),
+        array('name' => 'Zeeshan', 'result' => array('math' => 58, 'phy' => 89, 'chem' => 98, 'ur' => 67)),
+    )
+);
+echo $class_result['students'][2]['name'] . ", Math: " . $class_result['students'][2]['result']['math'];
 echo '<br>';
-echo array_sum($marks);
-var_dump(array_search(71, $marks));
-exit;
+echo $class_result['students'][0]['result']['math'];
+// repeatitive structure, loops
 
-
-
-$student_name = 'Zahid Munir';
-$math_total = 150;
-$math_obtained = 137;
-$phy_total = 150;
-$phy_obtained = 127;
-$chem_total = 150;
-$chem_obtained = 117;
-$urdu_total = 100;
-$urdu_obtained = 89;
-
-$total_marks = $math_total+$phy_total+$chem_total+$urdu_total;
-$marks = $math_obtained+$phy_obtained+$chem_obtained+$urdu_obtained;
-
-//$percent = 78.5;
-//$percent = 90;
-$percent = $marks/$total_marks*100;//; 970/1100*100
-//$percent = round($percent, 2);
-// Conditioal Operators: <, >, ==, <=, >=, !=
-// Operands
-
-if($percent>90) { // $marks>90 is condition
-    $grade = 'A+';
-} else if($percent>80 && $percent<91) {
-    $grade = 'A';
-} else if($percent>70 && $percent<81) {
-    $grade = 'B';
-} else if($percent>60 && $percent<71) {
-    $grade = 'C';
-} else if($percent>56 && $percent<61) {
-    $grade = 'D';
-} else if($percent>=50 && $percent<56) {
-    $grade = 'E';
-} else {
-    $grade = 'F';
+// 1. for loop
+// 2. while
+// 3. do - while
+// 4. foreach
+$i=0;
+$i++; // $i = $i+1;
+$i--; // $i = $i-1;
+echo '<br>';
+$table_for = 2;
+for($i=0; $i<10; $i++) {
+    echo $table_for*$i;
+    echo $i . ' | ';
 }
-?>
-<table border="1" width="500" cellspacing="0" cellpadding="2">
-    <tr><td colspan="4">Name: <?php echo $student_name; ?></td></tr>
-    <!--<tr><td colspan="4">====================================================</td></tr>-->
-    <tr>
-        <td>Subject</td>
-        <td>Total</td>
-        <td>Obtained</td>
-        <td>Percentage</td>
-    </tr>
-    <tr>
-        <td>Math</td>
-        <td><?php echo $math_obtained ?></td>
-        <td><?php echo $math_total ?></td>
-        <td><?php echo round($math_obtained/$math_total*100, 2); ?></td>
-    </tr>
-    <tr>
-        <td>Physics</td>
-        <td><?php echo $phy_obtained ?></td>
-        <td><?php echo $phy_total ?></td>
-        <td><?php echo round($phy_obtained/$phy_total*100, 2); ?></td>
-    </tr>
-    <tr>
-        <td>Chemistry</td>
-        <td><?php echo $chem_obtained ?></td>
-        <td><?php echo $chem_total ?></td>
-        <td><?php echo round($chem_obtained/$chem_total*100, 2); ?></td>
-    </tr>
-    <tr>
-        <td>Urdu</td>
-        <td><?php echo $urdu_obtained ?></td>
-        <td><?php echo $urdu_total ?></td>
-        <td><?php echo round($urdu_obtained/$urdu_total*100, 2); ?></td>
-    </tr>
-    <tr>
-        <!--<td>&nbsp;</td>-->
-        <td align="right" colspan="3">Total Marks: </td>
-        <td><?php echo $total_marks; ?></td>
-    </tr>
-    <tr>
-        <!--<td>&nbsp;</td>-->
-        <td align="right" colspan="3">Obtained Marks: </td>
-        <td><?php echo $marks; ?></td>
-    </tr>
-    <tr>
-        <!--<td>&nbsp;</td>-->
-        <td align="right" colspan="3">Percentage: </td>
-        <td><?php echo sprintf('%.2f', $percent); ?></td>
-    </tr>
-    <tr>
-        <!--<td>&nbsp;</td>-->
-        <td align="right" colspan="3">Grade: </td>
-        <td><?php echo $grade; ?></td>
-    </tr>
-</table>
+echo '<br>';
+$j = 0;
+while($j<10) {
+    echo $j . ' | ';
+    $j++;
+}
+echo '<br>';
+$k=0;
+do {
+    echo $k;
+    $k++;
+} while($k<10);
+$fruits = array('Apple', 'Banana', 'Mango', 'Pineapple');
+$new_fruits = array('A', 'B', 'C', 'D');
+foreach($fruits as $fruit) {
+    echo '<br>';
+    echo $fruit;
+    foreach($new_fruits as $new_fruit) {
+        echo '<br>';
+        echo $new_fruit;
+    }
+};
+echo count($fruits);
+for($i=0; $i<count($fruits); $i++) {
+    $fruits[$i];
+}
+/*
+****
+****
+****
+****
+*/
+echo '<br>';
+for($i=0; $i<4; $i++) {
+    for($j=0; $j<4; $j++) {
+        echo '*';
+    }
+    echo '<br>';
+}
+
+exit;
