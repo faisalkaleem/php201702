@@ -1,0 +1,11 @@
+1. Install MySQL Workbench 6.3 or latest.
+
+2. Perform following database operations.
+
+Create a database for a school
+Create a table to contain students record.
+    - Add atleast 8 columns/fields to save student information.
+
+3. Execute following query using PHP
+   - SELECT * FROM dbname.table_name;
+     SELECT * FROM php201702.student;

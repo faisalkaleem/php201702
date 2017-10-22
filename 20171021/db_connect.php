@@ -10,6 +10,6 @@ $result = mysqli_query($connection, 'SHOW DATABASES;');
 echo '<pre>';
 print_r($result);
 if($result) {
-    $row = mysqli_fetch_($result);
+    $row = mysqli_fetch_all($result);
     print_r($row);
 }
