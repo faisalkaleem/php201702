@@ -1,0 +1,3 @@
+Assignment:
+Create a function "listTabularData($record, $fields)" which will get records and fields names 
+and will print whole table using HTML <table> and related tags.
