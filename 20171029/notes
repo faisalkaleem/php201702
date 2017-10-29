@@ -1,0 +1,16 @@
+Assignment:
+Update the students listing pagination so that query string parameter accepts page
+number not the limit start.
+
+e.g: ?p=1 will display records starting from 1 to 4 and ?p=2 will display records
+from 5 to 8 and so on....
+
+
+Assignment:
+Read forms from https://www.w3schools.com/html/html_forms.asp
+
+CRUD operations
+
+Mockup tools:
+Balsamiq
+Pencil
