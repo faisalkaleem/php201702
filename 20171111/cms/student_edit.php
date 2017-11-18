@@ -1,22 +1,42 @@
 <?php
-error_reporting(E_ALL);
 include 'inc/db.php';
 include 'inc/helper.php';
-
-$sql_count = "SELECT COUNT(id) AS total_students FROM student";
-// Alias
-$result_count = mysqli_query($connection, $sql_count);
-$record_count = mysqli_fetch_assoc($result_count);
-
-$total_students = $record_count['total_students'];
-$p=1;
-if(isset($_GET['p']) && $_GET['p']>0) {
-    $p = $_GET['p'];
+//printR($_GET);
+//printR($_POST);
+$error = null;
+$messaage = null;
+if(isset($_GET['id'])) {
+    $sql = "SELECT * FROM student WHERE id=".$_GET['id'];
+    $rs = mysqli_query($connection, $sql);
+    if($rs) {
+        if(mysqli_num_rows($rs)) {
+            $student = mysqli_fetch_assoc($rs);
+        } else {
+            $error = 'Student not found.';
+        }
+    } else {
+        $error = mysqli_error($connection);
+    }
 }
-$limit_start = $p-1;
-$how_much_records_to_fetch = 4;
-$sql = 'SELECT id, name, dob AS date_of_birth, class FROM student LIMIT ' . "$limit_start,$how_much_records_to_fetch";
-$result = mysqli_query($connection, $sql);
+
+if (isset($_POST['name'])) {
+    $name = $_POST['name'];
+    $dob = $_POST['dob'];
+    $class = $_POST['class'];
+    // SQL to insert data into table
+    // INSERT INTO {table_name} ({comma seperated list of columns}) VALUES ({comma seperated list of values is same order as columns})
+    // UPDATE student SET name="New Name", dob="New DOB", class="New Class";
+    $sql = "UPDATE student SET name='$name', dob='$dob', class='$class'"
+            . " WHERE id = ".$student['id'];
+    if (!mysqli_query($connection, $sql)) {
+        echo 'There is an error in the update statement';
+        echo mysqli_error($connection);
+        exit;
+    } else {
+        $messaage = 'Student data successfully updated.';
+        header('Location:students.php?message='.$messaage);
+    }
+}
 ?>
 <!--
 Author: W3layouts
@@ -27,7 +47,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Minimal an Admin Panel Category Flat Bootstrap Responsive Website Template | Blank :: w3layouts</title>
+        <title>Minimal an Admin Panel Category Flat Bootstrap Responsive Website Template | Forms :: w3layouts</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Minimal Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -48,25 +68,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="js/custom.js"></script>
         <script src="js/screenfull.js"></script>
         <script>
-$(function () {
-$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+            $(function () {
+                $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
 
-if (!screenfull.enabled) {
-return false;
-}
-
-
-
-$('#toggle').click(function () {
-screenfull.toggle($('#container')[0]);
-});
+                if (!screenfull.enabled) {
+                    return false;
+                }
 
 
 
-});
+                $('#toggle').click(function () {
+                    screenfull.toggle($('#container')[0]);
+                });
+
+
+
+            });
         </script>
 
-
+        <!----->
 
     </head>
     <body>
@@ -89,8 +109,8 @@ screenfull.toggle($('#container')[0]);
                         </section>
                         <form class=" navbar-left-right">
                             <input type="text"  value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {
-                          this.value = 'Search...';
-                      }">
+                                        this.value = 'Search...';
+                                    }">
                             <input type="submit" value="" class="fa fa-search">
                         </form>
                         <div class="clearfix"> </div>
@@ -191,50 +211,59 @@ screenfull.toggle($('#container')[0]);
                         <h2>
                             <a href="index.html">Home</a>
                             <i class="fa fa-angle-right"></i>
-                            <span>Blank</span>
+                            <span>Forms</span>
                         </h2>
                     </div>
                     <!--//banner-->
-                    <!--faq-->
-                    <div class="blank">
-                        <?php if(isset($_GET['message'])) { ?>
-                            <div class="alert alert-success" role="alert"><?php echo $_GET['message']; ?></div>
-                        <?php } ?>
-                        <a href="student_add.php" class="btn btn-primary">Add New</a>
-                        <div class="students-list">
-                            <?php
-//                            $name = false;
-//                            var_dump(empty($name));
-//                            var_dump(isset($abc));
-//                            exit;
-//                            if(!empty($name)) echo $name;
-                            echo '<table class="table">';
-                            echo '<thead><tr><th>ID</th><th>Name</th><th>DOB</th><th>Class</th><th>&nbsp;</th></tr></thead><tbody>';
-                            while (($record = mysqli_fetch_assoc($result))) {
-                                echo '<tr><td>' . $record['id'] . '</td><td>' . $record['name'] . '</td><td>' .
-                                    $record['date_of_birth'] . "</td><td>" . $record['class'] . "</td>".
-                                    '<td>'
-                                    . '<a href="student_edit.php?id='.$record['id'].'"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>'
-                                    . '<a href="student_delete.php?id='.$record['id'].'"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>'
-                                    . '</td></tr>';
-                            }
-                            echo '</tbody></table>';
-                            $num_of_pages = ceil($total_students / $how_much_records_to_fetch);
-                            ?>
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                <?php
-                                    for ($i = 1; $i <= $num_of_pages; $i++) {
-                                        $page_to_dispaly = $i * $how_much_records_to_fetch - $how_much_records_to_fetch + 1;
-                                        echo '<li><a href="?p=' . $page_to_dispaly . '">' . $i . '</a></li>';
-                                    }
-                                ?>
-                                </ul>
-                            </nav>
+                    <!--grid-->
+                    <div class="grid-form">
+                        <?php if($error) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $error; ?>
                         </div>
+                        <?php } else { ?>
+                        <!---->
+                        <div class="grid-form1">
+                            <h3>Adding Student</h3>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="horizontal-form">
+                                    <form class="form-horizontal" method="post">
+                                        <div class="form-group">
+                                            <label for="student-name" class="col-sm-2 control-label">Name</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" value="<?php echo $student['name']; ?>" class="form-control1" id="student-name" placeholder="Student name" name="name">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <p class="help-block">Your help text!</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dob" class="col-sm-2 control-label">Date of Birth</label>
+                                            <div class="col-sm-8">
+                                                <input name="dob" type="text" value="<?php echo $student['dob']; ?>"class="form-control1" id="dob" placeholder="Date of birth">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="class" class="col-sm-2 control-label">Class</label>
+                                            <div class="col-sm-8">
+                                                <input name="class" type="text" value="<?php echo $student['class']; ?>"class="form-control1" id="class" placeholder="Class">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+                                                <button class="btn-primary btn">Submit</button>
+                                                <button class="btn-default btn">Cancel</button>
+                                                <button class="btn-inverse btn">Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
-
-                    <!--//faq-->
+                    
+                    <!--//grid-->
                     <!---->
                     <div class="copy">
                         <p> &copy; 2016 Minimal. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>	    </div>
@@ -242,12 +271,11 @@ screenfull.toggle($('#container')[0]);
             </div>
             <div class="clearfix"> </div>
         </div>
-
-        <!---->
         <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
         <!--//scrolling js-->
+        <!---->
+
     </body>
 </html>
-
