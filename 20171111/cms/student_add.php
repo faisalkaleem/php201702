@@ -2,22 +2,30 @@
 include 'inc/db.php';
 include 'inc/helper.php';
 //printR($_GET);
-//printR($_POST);
 if (isset($_POST['name'])) {
+    $picture = 'null';
+    // Attache timestamp with the filename to avoid overritten of files.
+    // Although its also not perfect solution but works.
+    // You can 
+    $filename = time().'_'.$_FILES['picture']['name'];
+    $destination = 'student' . DIRECTORY_SEPARATOR . $filename;
+    if(uploadFile('picture', $destination)) {
+        $picture = "'".$filename."'";
+    }
     $name = $_POST['name'];
     $dob = $_POST['dob'];
     $class = $_POST['class'];
+    $gender = $_POST['gender'];
     // SQL to insert data into table
     // INSERT INTO {table_name} ({comma seperated list of columns}) VALUES ({comma seperated list of values is same order as columns})
-    $sql = "INSERT INTO student (name, dob, class) "
-            . "VALUES ('$name', '$dob', '$class')";
+    $sql = "INSERT INTO student (name, gender, picture, dob, class) "
+            . "VALUES ('$name', '$gender', $picture, '$dob', '$class')";
     if (!mysqli_query($connection, $sql)) {
         echo 'There is an error in the insert statement';
         echo mysqli_error($connection);
         exit;
     } else {
-        $id = mysqli_insert_id($connection);
-        echo 'student data successfully added with id: ' . $id;
+        redirect('students.php');
     }
 }
 ?>
@@ -205,36 +213,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <h3>Adding Student</h3>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="horizontal-form">
-                                    <form class="form-horizontal" method="post">
-                                        <div class="form-group">
-                                            <label for="student-name" class="col-sm-2 control-label">Name</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control1" id="student-name" placeholder="Student name" name="name">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <p class="help-block">Your help text!</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="dob" class="col-sm-2 control-label">Date of Birth</label>
-                                            <div class="col-sm-8">
-                                                <input name="dob" type="text" class="form-control1" id="dob" placeholder="Date of birth">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="class" class="col-sm-2 control-label">Class</label>
-                                            <div class="col-sm-8">
-                                                <input name="class" type="text" class="form-control1" id="class" placeholder="Class">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8 col-sm-offset-2">
-                                                <button class="btn-primary btn">Submit</button>
-                                                <button class="btn-default btn">Cancel</button>
-                                                <button class="btn-inverse btn">Reset</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <?php include '_student_form.php'; ?>
                                 </div>
                             </div>
                         </div>

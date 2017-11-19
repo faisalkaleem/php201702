@@ -15,7 +15,7 @@ if(isset($_GET['p']) && $_GET['p']>0) {
 }
 $limit_start = $p-1;
 $how_much_records_to_fetch = 4;
-$sql = 'SELECT id, name, dob AS date_of_birth, class FROM student LIMIT ' . "$limit_start,$how_much_records_to_fetch";
+$sql = 'SELECT id, name, gender, picture, dob AS date_of_birth, class FROM student LIMIT ' . "$limit_start,$how_much_records_to_fetch";
 $result = mysqli_query($connection, $sql);
 ?>
 <!--
@@ -213,6 +213,7 @@ screenfull.toggle($('#container')[0]);
                             while (($record = mysqli_fetch_assoc($result))) {
                                 echo '<tr><td>' . $record['id'] . '</td><td>' . $record['name'] . '</td><td>' .
                                     $record['date_of_birth'] . "</td><td>" . $record['class'] . "</td>".
+                                    '<td><img height="40" src="'.BASE_URL.'/data/student/'.$record['picture'].'" /></td>'.
                                     '<td>'
                                     . '<a href="student_edit.php?id='.$record['id'].'"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>'
                                     . '<a href="student_delete.php?id='.$record['id'].'"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>'
