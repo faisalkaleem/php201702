@@ -1,3 +1,18 @@
+2017-12-02
+-------------------
+1.  Create form with a single field to input "name"
+    Implement a select query to find all the row data against that name.
+    e.g; SELECT * FROM student WHERE name = '$_POST['name']' ;
+    Store all the recrod of that student e.g:
+$_SESSION['id'] = $record['id'];
+$_SESSION['name'] = $record['name'];
+
+Then display the $_SESSION['name'] value on top right side.
+
+2. Google PHP's "header" function and read about it.
+e.g: header("Location:location");
+
+
 2017-11-19
 ----------------
 Assignment: Use _student_form.php on both student_add and student_edit pages.
