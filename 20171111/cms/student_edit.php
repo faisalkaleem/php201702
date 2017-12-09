@@ -1,6 +1,7 @@
 <?php
 include 'inc/db.php';
 include 'inc/helper.php';
+requireLogin();
 //printR($_GET);
 //printR($_POST);
 $error = null;

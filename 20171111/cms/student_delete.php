@@ -1,5 +1,7 @@
 <?php
 require 'inc/db.php';
+require 'inc/helper.php';
+requireLogin();
 echo 'Are you sure? You want to delete student.';
 echo '<a href="student_delete.php?confirm=y&id='.$_GET['id'].'">Yes</a> <a href="students.php">No</a>';
 if(isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm']=='y') {
